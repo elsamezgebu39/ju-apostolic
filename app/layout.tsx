@@ -14,10 +14,6 @@ export const metadata = {
 export default async function RootLayout({ children }: any) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-      </head>
-
       <body>
         {/* <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" /> */}
         <div className="main">
