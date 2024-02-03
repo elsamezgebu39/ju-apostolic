@@ -64,7 +64,7 @@ const Login = () => {
                 <Input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e: any) => setEmail(e.target.value)}
                   className="w-full"
                   prefix={<UserOutlined />}
                 />
@@ -73,7 +73,7 @@ const Login = () => {
                 <Input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e: any) => setPassword(e.target.value)}
                   className="w-full"
                   prefix={<LockOutlined />}
                 />
@@ -105,7 +105,7 @@ const Login = () => {
                 </Button>
               </div>
               <div className="mt-4 text-center text-gray-600">
-                Don't have an account? Sign up now.
+                {`Don't have an account? Sign up now.`}
               </div>
             </Form>
           </div>
