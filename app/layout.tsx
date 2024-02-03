@@ -1,4 +1,4 @@
-import "@app/styles/globals.scss";
+import "./../app/styles/globals.scss";
 // import cx from "classnames";
 // import { sfPro, inter } from "./fonts";
 import { Layout, Menu, Dropdown, Avatar } from "antd";
