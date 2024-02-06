@@ -40,7 +40,7 @@ const Login = () => {
             className="bg-cover bg-center bg-no-repeat w-full h-full relative"
             style={{
               backgroundImage: `url('/assets/images/JUSTUDENT.JPG')`,
-              opacity: 0.6, // Adjust opacity value as needed
+              opacity: 0.6,
             }}
           >
             .
@@ -51,7 +51,7 @@ const Login = () => {
               Welcome to JU Apostolic Generation
             </h2>
             <p className="text-lg text-shadow-lg border-2 border-white w-[60%] rounded-lg px-5">
-              Empowering Spiritual Generation
+              Strengthening the Christian Generation
             </p>
           </div>
         </div>
@@ -99,13 +99,13 @@ const Login = () => {
                 <Button
                   type="default"
                   className="w-full"
-                  onClick={() => console.log("Sign Up")}
+                  onClick={() => router.push("/register")}
                 >
-                  Sign Up
+                  Member Registration Form
                 </Button>
               </div>
               <div className="mt-4 text-center text-gray-600">
-                {`Don't have an account? Sign up now.`}
+                {`Don't have an account? Click on the registration link to become a registered member.`}
               </div>
             </Form>
           </div>
