@@ -45,12 +45,15 @@ const Login = () => {
           >
             .
           </div>
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-gray-500 via-transparent to-gray-500 opacity-40"></div>
-          <div className="absolute top-3/4 left-[20rem] transform -translate-x-1/2 -translate-y-1/2 text-white text-left">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-white bg-opacity-30 p-6 border border-gray-200 shadow-md rounded-md z-10">
+            .
+          </div>
+          {/* <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-gray-500 via-transparent to-gray-500 opacity-40"></div> */}
+          <div className="absolute top-3/4 left-[22rem] transform -translate-x-1/2 -translate-y-1/2 text-white text-left">
             <h2 className="text-3xl font-extrabold mb-2 text-shadow-lg">
               Welcome to JU Apostolic Generation
             </h2>
-            <p className="text-lg text-shadow-lg border-2 border-white w-[60%] rounded-lg px-5">
+            <p className="text-lg text-shadow-lg border-2 border-white w-[80%] rounded-lg px-5">
               Strengthening the Christian Generation
             </p>
           </div>
