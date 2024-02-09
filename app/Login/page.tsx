@@ -63,14 +63,14 @@ const Login = () => {
             </h2>
             <Button
               type="default"
-              className="w-3/4 text-lg text-white font-semibold flex justify-center items-center"
+              className="w-[80%] text-lg text-black font-semibold flex justify-center items-center bg-white"
               onClick={() => router.push("/register")}
             >
               Register Now
             </Button>
           </div>
         </div>
-        <div className="w-full z-50 bg-white h-[50%] flex flex-col justify-center items-start pt-20 px-4 md:pt-4">
+        <div className="w-full z-50 bg-white h-[50%] flex flex-col justify-center items-start pt-28 px-4 md:pt-4">
           <h1 className="text-2xl font-semibold mb-2">Welcome,</h1>
           <h1 className="text-lg mb-8">Login to your account</h1>
           <Form>
