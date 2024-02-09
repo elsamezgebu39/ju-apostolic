@@ -9,8 +9,10 @@ import {
   Button,
   Card,
   message,
+  Checkbox,
 } from "antd";
 import Link from "next/link";
+import Navbar from "./../../components/Nav";
 import { UserOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
@@ -26,10 +28,19 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="flex items-start justify-center h-screen bg-gradient-to-br from-blue-200 via-transparent to-blue-50">
+    <div className="flex flex-col items-center justify-start h-screen relative">
+      <div className="absolute w-full h-full bg-blue-200"></div>
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          backgroundImage:
+            "linear-gradient(45deg, transparent 49.5%, #blue-50 49.5%, #blue-50 50.5%, transparent 50.5%)",
+        }}
+      ></div>
+      <Navbar />
       <Card
         title="Member Registration"
-        className="w-[40%] shadow-md mt-10 border border-gray-200"
+        className="w-full sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] shadow-md mt-10 border border-gray-200"
       >
         <p className="text-gray-700 mb-5">
           ይህ ፎርም የተዘጋጀው የጂማ ዩንቨርስቲ ሐዋርያዊት ቤ/ክርስቲያን የቀድሞ ተማሪዎች እና አሁን ያሉ ተማሪዎች
@@ -50,15 +61,42 @@ const RegisterPage: React.FC = () => {
               placeholder="Enter your full name"
             />
           </Form.Item>
+
           <Form.Item label="Gender" name="gender" initialValue={gender}>
             <Radio.Group onChange={(e) => setGender(e.target.value)}>
               <Radio value="male">Male</Radio>
               <Radio value="female">Female</Radio>
             </Radio.Group>
           </Form.Item>
+
+          <Form.Item
+            label="Phone"
+            name="phoneNumber"
+            rules={[
+              { required: true, message: "Please enter your phone number!" },
+            ]}
+          >
+            <Input type="tel" placeholder="Enter your phone number" />
+          </Form.Item>
+
+          <Form.Item
+            label="Email"
+            name="emailAddress"
+            rules={[
+              { required: true, message: "Please enter your email address!" },
+            ]}
+          >
+            <Input type="email" placeholder="Enter your email address" />
+          </Form.Item>
+
+          <Form.Item label="JU entry year" name="entryYear">
+            <DatePicker style={{ width: "100%" }} />
+          </Form.Item>
+
           <Form.Item label="Graduation Year From" name="graduationYear">
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
+
           <Form.Item
             label="Field of Study"
             name="fieldOfStudy"
@@ -68,16 +106,59 @@ const RegisterPage: React.FC = () => {
           >
             <Input placeholder="Enter your field of study" />
           </Form.Item>
-          <Form.Item
-            label="First Level of Graduation From JU"
-            name="graduationLevel"
-          >
+
+          <Form.Item label="Level" name="graduationLevel">
             <Select placeholder="Select graduation level">
               <Option value="diploma">Diploma</Option>
               <Option value="undergraduate">Undergraduate</Option>
               <Option value="masters">Masters</Option>
             </Select>
           </Form.Item>
+
+          <Form.Item
+            label="Your role in JUAC when your were student"
+            name="role"
+            rules={[
+              {
+                required: true,
+                message: "Please select role in JUAC when your were student!",
+              },
+            ]}
+          >
+            <Select placeholder="Select your current address">
+              <Option value="Member">Member</Option>
+              <Option value="fellow_leaders">Fellow leaders</Option>
+              <Option value="leading_team_member">Leading team member</Option>
+              <Option value="chorus_member">Chorus member</Option>
+              <Option value="musician">Musician</Option>
+              <Option value="other">Other (mention)</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            label="JUACU engagement center"
+            name="JUACU_engagement_center"
+            rules={[
+              {
+                required: true,
+                message: "Please select JUACU engagement center!",
+              },
+            ]}
+          >
+            <Select placeholder="Select your current address">
+              <Option value="addisAbaba">Addis Ababa and area</Option>
+              <Option value="jimma">Jimma and area</Option>
+              <Option value="wolaita">Wolaita soddo and area</Option>
+              <Option value="hawassa">Hawassa and area</Option>
+              <Option value="adama">Adama</Option>
+              <Option value="hossana">Hossana and area</Option>
+              <Option value="adola">Adola and area</Option>
+              <Option value="ambo">Ambo and area </Option>
+              <Option value="north">North</Option>
+              <Option value="east">East Ethiopia </Option>
+            </Select>
+          </Form.Item>
+
           <Form.Item
             label="Your Current Address (City)"
             name="currentAddress"
@@ -88,70 +169,35 @@ const RegisterPage: React.FC = () => {
               },
             ]}
           >
-            <Select placeholder="Select your current address">
-              <Option value="addisAbaba">Addis Ababa</Option>
-              <Option value="hawasa">Hawasa</Option>
-              <Option value="adama">Adama</Option>
-              <Option value="hossana">Hossana</Option>
-              <Option value="sodo">Sodo</Option>
-              <Option value="direDawa">DireDawa</Option>
-              <Option value="other">Other</Option>
+            <Input placeholder="Enter your current address" />
+          </Form.Item>
+
+          <Form.Item
+            label="Engagement in current local church"
+            name="engagement"
+            rules={[
+              {
+                required: true,
+                message: "Please select Engagement in current local church",
+              },
+            ]}
+          >
+            <Select placeholder="Engagement in current local church">
+              <Option value="pastor">Pastor</Option>
+              <Option value="deacon">Deacon</Option>
+              <Option value="youth/mothers/fathers_service">
+                Youth/mothers/fathers service
+              </Option>
+              <Option value="board_member<">board member</Option>
+              <Option value="Sunday_sermon_service_(ጉባኤ_አስተናጋጅ)">
+                Sunday sermon sservice (ጉባኤ_አስተናጋጅ)
+              </Option>
+              <Option value="Other">Other service (mention)</Option>
             </Select>
           </Form.Item>
 
           <Form.Item
-            label="Current Local Church Name"
-            name="currentChurchName"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your current church name!",
-              },
-            ]}
-          >
-            <Input placeholder="Enter your current church name" />
-          </Form.Item>
-
-          <Form.Item
-            label="Do You Have a Service at Your Current Local Church?"
-            name="hasService"
-            rules={[
-              {
-                required: true,
-                message: "Please select whether you have a service!",
-              },
-            ]}
-          >
-            <Radio.Group>
-              <Radio value={true}>Yes</Radio>
-              <Radio value={false}>No</Radio>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label="Students In JU organized fellowship conference on May 2023. Some of the former students participated in the conference and decided to strengthen the fellowship, support the church and planned to conduct conference in near future. Do you agree to engaged in the mentioned program above?"
-            name="engagementAgreement"
-            rules={[
-              {
-                required: true,
-                message: "Please agree to the engagement agreement!",
-              },
-            ]}
-          >
-            <Radio.Group>
-              <Radio value="yes">Yes</Radio>
-              <Radio value="no">No</Radio>
-              <Radio value="maybe">Maybe</Radio>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label="To support the JU local church and strengthen the fellowship its proposed to contribute the following amount of money. A. 600 per member per year 
-                                  B. 1200 per member per year
-                                  C. As per capacity do not limit
-                                  D. 2400 per member per year (for                                                diaspora member)
-                                  E. 120 per year (for students)
-Which one do you prefer to contribute?"
+            label="Annual membership contribution fee"
             name="engagementAgreement"
             rules={[
               {
@@ -170,7 +216,7 @@ Which one do you prefer to contribute?"
           </Form.Item>
 
           <Form.Item
-            label="How frequent can you pay your contribution?"
+            label="Payment period "
             name="contributionFrequency"
             rules={[
               {
@@ -192,109 +238,57 @@ Which one do you prefer to contribute?"
           </Form.Item>
 
           <Form.Item
-            label="Do you want some one to remind you for contribution?"
-            name="remindForContribution"
+            name="guidingDocument"
+            label="Guiding Document (upload)"
             rules={[
               {
                 required: true,
-                message: "Please select whether you want to be reminded!",
+                message: "Please upload the guiding document!",
               },
             ]}
           >
-            <Radio.Group>
-              <Radio value={true}>Yes</Radio>
-              <Radio value={false}>No</Radio>
-            </Radio.Group>
+            <Input type="file" />
           </Form.Item>
 
           <Form.Item
-            label="Your Phone Number"
-            name="phoneNumber"
+            name="agreementOnGuidingDocument"
+            valuePropName="checked"
             rules={[
-              { required: true, message: "Please enter your phone number!" },
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject("Please agree to the guiding document!"),
+              },
             ]}
           >
-            <Input type="tel" placeholder="Enter your phone number" />
+            <Checkbox>Agreement on guiding document</Checkbox>
           </Form.Item>
 
           <Form.Item
-            label="Your Email Address"
-            name="emailAddress"
-            rules={[
-              { required: true, message: "Please enter your email address!" },
-            ]}
-          >
-            <Input type="email" placeholder="Enter your email address" />
-          </Form.Item>
-
-          <Form.Item
-            label="Do you think you can participate in the conference organized by JUAS fellowship In Jima in near future?"
-            name="participationInConference"
+            name="signature"
+            label="Signature (Name)"
             rules={[
               {
                 required: true,
-                message: "Please select your participation status!",
+                message: "Please provide your signature (name)!",
               },
             ]}
           >
-            <Select placeholder="Select participation status">
-              <Option value="yes">Yes</Option>
-              <Option value="no">No</Option>
-              <Option value="maybe">Maybe</Option>
-            </Select>
+            <Input />
           </Form.Item>
 
           <Form.Item
-            label="If you have any question (contact Misganaw AA 0910596020, Tigabu AA 0916396011, Eyosias Israel 0912458178, Misganaw Hossana, Gizachew 0921005117, Mihiret Tesfaye 0928799197"
-            name="questionsContactConfirmation"
-            rules={[
-              { required: true, message: "Please confirm your awareness!" },
-            ]}
-          >
-            <Radio.Group>
-              <Radio value="noted">Yes Noted</Radio>
-            </Radio.Group>
-          </Form.Item>
-
-          {/* <Form.Item
-            label="Account Number for Contribution"
-            name="accountNumberConfirmation"
-            rules={[
-              { required: true, message: "Please confirm your awareness!" },
-            ]}
-          >
-            <Radio.Group>
-              <Radio value="noted">Noted</Radio>
-            </Radio.Group>
-          </Form.Item> */}
-
-          <Form.Item
-            label="Account number created for this mission and Bishop Zekios already agreed and aware of the program and the account number is 1000579788686 Apostolic church of Ethiopia JS fellowship. "
-            name="notificationForContribution"
-            rules={[
-              { required: true, message: "Please confirm your awareness!" },
-            ]}
-          >
-            <Radio.Group>
-              <Radio value="ok">Noted</Radio>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label="Confirm as if you filled all the questions and aware of above purpose"
-            name="awarenessConfirmation"
+            name="date"
+            label="Date"
             rules={[
               {
                 required: true,
-                message: "Please confirm your awareness and agreement!",
+                message: "Please select the date!",
               },
             ]}
           >
-            <Radio.Group>
-              <Radio value="awareAndAgree">Aware and agree</Radio>
-              <Radio value="needExplanation">Need further explanation</Radio>
-              <Radio value="decideLater">Will decide later</Radio>
-            </Radio.Group>
+            <DatePicker style={{ width: "100%" }} />
           </Form.Item>
 
           <Form.Item>
