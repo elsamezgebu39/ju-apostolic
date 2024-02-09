@@ -45,10 +45,10 @@ const Login = () => {
           >
             .
           </div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-1/2 bg-white bg-opacity-30 p-6 border border-gray-200 shadow-md rounded-md z-10">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 h-1/2 bg-white bg-opacity-30 p-6 border border-gray-200 shadow-md rounded-md z-10">
             .
           </div>
-          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+          <div className="hidden lg:flex absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
             <h2 className="text-2xl font-extrabold mb-2 text-shadow-lg">
               Welcome to JU Apostolic Generation
             </h2>
@@ -56,8 +56,21 @@ const Login = () => {
               Strengthening the Christian Generation
             </p>
           </div>
+
+          <div className="lg:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center flex flex-col justify-center items-center z-50">
+            <h2 className="text-2xl font-extrabold mb-2 text-shadow-lg">
+              Welcome to JU Apostolic Generation
+            </h2>
+            <Button
+              type="default"
+              className="w-3/4 text-lg text-white font-semibold flex justify-center items-center"
+              onClick={() => router.push("/register")}
+            >
+              Register Now
+            </Button>
+          </div>
         </div>
-        <div className="w-full z-50 bg-white h-[50%] flex flex-col justify-center items-center p-4">
+        <div className="w-full z-50 bg-white h-[50%] flex flex-col justify-center items-start pt-20 px-4 md:pt-4">
           <h1 className="text-2xl font-semibold mb-2">Welcome,</h1>
           <h1 className="text-lg mb-8">Login to your account</h1>
           <Form>

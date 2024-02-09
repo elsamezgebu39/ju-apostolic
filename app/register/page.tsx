@@ -8,9 +8,11 @@ import {
   Select,
   Button,
   Card,
+  Upload,
   message,
   Checkbox,
 } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Navbar from "./../../components/Nav";
 import { UserOutlined } from "@ant-design/icons";
@@ -20,11 +22,38 @@ const { Option } = Select;
 const RegisterPage: React.FC = () => {
   const [form] = Form.useForm();
   const [gender, setGender] = useState("male"); // Default gender value
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
   const onFinish = (values: any) => {
     console.log("Received values:", values);
     message.success("Successfully registered. Thank you!");
     form.resetFields();
+  };
+
+  const handleTermsChange = (e: any) => {
+    setIsTermsAccepted(e.target.checked);
+  };
+
+  const normFile = (e: any) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  };
+
+  const checkImageType = (file: any) => {
+    const isImage = file.type.startsWith("image/");
+    if (!isImage) {
+      message.error("You can only upload image files!");
+    }
+    return isImage;
+  };
+
+  const customRequest = ({ file, onSuccess, onError }: any) => {
+    setTimeout(() => {
+      // Mock upload, you can replace this with your actual upload logic
+      onSuccess();
+    }, 1000);
   };
 
   return (
@@ -40,14 +69,14 @@ const RegisterPage: React.FC = () => {
       <Navbar />
       <Card
         title="Member Registration"
-        className="w-full sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] shadow-md mt-10 border border-gray-200"
+        className="w-[95%] sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] shadow-md mt-16 border border-gray-200"
       >
-        <p className="text-gray-700 mb-5">
+        {/* <p className="text-gray-700 mb-5">
           ይህ ፎርም የተዘጋጀው የጂማ ዩንቨርስቲ ሐዋርያዊት ቤ/ክርስቲያን የቀድሞ ተማሪዎች እና አሁን ያሉ ተማሪዎች
           ሕብረት በማጠናከር የተማሪዎችን ሕብረት ማጠናከር እና ሰበካውን ለመደገፍ እንድያስችል መረጃ በመሰብሰብ ማድራጅት
           ነው። በተጨማሪም ባለፈው ዓመት በተከናወነው የህብረት ኮንፈረን ላይ እና በአካባቢዎ በተደረገው ውይይት መሠረት
           የያዝናቸውን ዓላማዎችን ለማስፈጸም ነው።
-        </p>
+        </p> */}
         <Form form={form} onFinish={onFinish} layout="vertical">
           <Form.Item
             label="Full Name"
@@ -206,13 +235,13 @@ const RegisterPage: React.FC = () => {
               },
             ]}
           >
-            <Radio.Group>
-              <Radio value="600">600 per year</Radio>
-              <Radio value="1200">1200 per year</Radio>
-              <Radio value="notLimit">Do not limit (but I can support)</Radio>
-              <Radio value="1200">2400 per year (diaspora)</Radio>
-              <Radio value="notLimit">120 per year (for students)</Radio>
-            </Radio.Group>
+            <Select placeholder="Annual membership contribution fee">
+              <Option value="600">600 per year</Option>
+              <Option value="1200">1200 per year</Option>
+              <Option value="notLimit">Do not limit (but I can support)</Option>
+              <Option value="1200">2400 per year (diaspora)</Option>
+              <Option value="notLimit">120 per year (for students)</Option>
+            </Select>
           </Form.Item>
 
           <Form.Item
@@ -237,9 +266,9 @@ const RegisterPage: React.FC = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="guidingDocument"
-            label="Guiding Document (upload)"
+            label="Guiding Document (photo)"
             rules={[
               {
                 required: true,
@@ -248,21 +277,26 @@ const RegisterPage: React.FC = () => {
             ]}
           >
             <Input type="file" />
-          </Form.Item>
-
+          </Form.Item> */}
           <Form.Item
-            name="agreementOnGuidingDocument"
-            valuePropName="checked"
+            label="Guiding Document Image"
+            name="guidingDocumentImage"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
             rules={[
               {
-                validator: (_, value) =>
-                  value
-                    ? Promise.resolve()
-                    : Promise.reject("Please agree to the guiding document!"),
+                required: true,
+                message: "Please upload your guiding document image",
               },
             ]}
           >
-            <Checkbox>Agreement on guiding document</Checkbox>
+            <Upload
+              customRequest={customRequest}
+              showUploadList={false}
+              beforeUpload={checkImageType}
+            >
+              <Button icon={<UploadOutlined />}>Upload Image</Button>
+            </Upload>
           </Form.Item>
 
           <Form.Item
@@ -278,17 +312,10 @@ const RegisterPage: React.FC = () => {
             <Input />
           </Form.Item>
 
-          <Form.Item
-            name="date"
-            label="Date"
-            rules={[
-              {
-                required: true,
-                message: "Please select the date!",
-              },
-            ]}
-          >
-            <DatePicker style={{ width: "100%" }} />
+          <Form.Item>
+            <Checkbox onChange={handleTermsChange} checked={isTermsAccepted}>
+              Agreement on guiding document
+            </Checkbox>
           </Form.Item>
 
           <Form.Item>
@@ -296,6 +323,7 @@ const RegisterPage: React.FC = () => {
               type="default"
               htmlType="submit"
               className="w-full bg-blue-400 text-white hover:bg-blue-500"
+              disabled={!isTermsAccepted}
             >
               Register
             </Button>
