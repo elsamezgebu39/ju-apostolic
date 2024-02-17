@@ -2,6 +2,7 @@ import React from "react";
 
 const TermsAndCondtions = () => {
   return (
+    // eslint-disable-next-line rule-name
     <div className="p-4">
       <p className="text-lg font-bold text-center mb-4">
         የጂማ ዩንቨርስቲ ሐዋርያዊት ቤ/ክርስቲያን የተማሩ እና በመማር ላይ ያሉ ተማሪዎቸ ሕብረት ማጠናከሪያ ሰነድ
