@@ -108,7 +108,7 @@ export default Home;
 
 //   const handleMenuClick = (e: any) => {
 //     if (e.key === "logout") {
-//       router.push("/Login");
+//       router.push("/login");
 //       // Perform logout action
 //       console.log("Logout clicked");
 //     }

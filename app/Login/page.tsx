@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 
 const { Content } = Layout;
 
-const Login = () => {
+const login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +29,7 @@ const Login = () => {
     },
   ];
 
-  const handleLogin = () => {
+  const handlelogin = () => {
     console.log(`Email: ${email}, Password: ${password}`);
     const user = users.find(
       (user) => user.email === email && user.password === password
@@ -52,7 +52,7 @@ const Login = () => {
             className="bg-cover bg-center bg-no-repeat w-full h-full relative"
             style={{
               backgroundImage: `url('/assets/images/JUSTUDENT.JPG')`,
-              opacity: 0.6,
+              opacity: 0.4,
             }}
           >
             .
@@ -73,7 +73,7 @@ const Login = () => {
 
           {/* Welcome Message - Small Screen */}
           <div className="lg:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center flex flex-col justify-center items-center z-50">
-            <h2 className="text-2xl font-extrabold mb-2 text-shadow-lg">
+            <h2 className="text-2xl text-white font-extrabold mb-2 text-shadow-lg">
               Welcome to JU Apostolic Generation
             </h2>
             <Button
@@ -86,9 +86,9 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="w-full z-50 bg-white h-[50%] md:h-full flex flex-col justify-center items-start px-4 md:px-32 md:pt-4 pt-12 my-auto mx-auto">
+        <div className="w-full z-50 bg-white h-[50%] md:h-full flex flex-col justify-center items-start px-4 md:px-32 md:pt-4 pt-16 my-auto mx-auto">
           <h1 className="text-2xl font-semibold mb-2 mt-4">Welcome,</h1>
-          <h1 className="text-lg mb-8">Login to your account</h1>
+          <h1 className="text-lg mb-8">login to your account</h1>
           <Form>
             <Form.Item label="Email">
               <Input
@@ -111,10 +111,10 @@ const Login = () => {
             <Form.Item className="mb-4">
               <Button
                 type="primary"
-                onClick={handleLogin}
+                onClick={handlelogin}
                 className="w-full bg-blue-500 hover:bg-blue-600"
               >
-                Login to your account
+                login to your account
               </Button>
             </Form.Item>
             <div className="flex justify-between">
@@ -144,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default login;

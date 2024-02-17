@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>Login | FUMS</title>
+      <title>login | FUMS</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta
         name="description"
