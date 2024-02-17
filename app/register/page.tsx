@@ -16,18 +16,58 @@ import { UploadOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Navbar from "./../../components/Nav";
 import { UserOutlined } from "@ant-design/icons";
-
+import { getCsrfToken } from "./../../services/getCsrfService";
+import axios from "./../../config/axiosInstance";
 const { Option } = Select;
 
 const RegisterPage: React.FC = () => {
   const [form] = Form.useForm();
-  const [gender, setGender] = useState("male"); // Default gender value
+  const [gender, setGender] = useState("male");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
-  const onFinish = (values: any) => {
-    console.log("Received values:", values);
-    message.success("Successfully registered. Thank you!");
-    form.resetFields();
+  const onFinish = async (values: any) => {
+    try {
+      const formData = new FormData();
+
+      formData.append('fullName', values.fullName);
+      formData.append('graduationLevel', values.graduationLevel);
+      formData.append('JUACU_engagement_center', values.JUACU_engagement_center);
+      formData.append('currentAddress', values.currentAddress);
+      formData.append('emailAddress', values.emailAddress);
+      formData.append('fieldOfStudy', values.fieldOfStudy);
+      formData.append('engagement', values.engagement);
+      formData.append('engagementAgreement', values.engagementAgreement);
+      formData.append('entryYear', values.entryYear);
+      formData.append('gender', values.gender);
+      formData.append('graduationYear', values.graduationYear);
+      formData.append('paymentPeriod', values.paymentPeriod);
+      formData.append('phoneNumber', values.phoneNumber);
+      formData.append('role', values.role);
+      formData.append('signature', values.signature);
+      formData.append('profileImage', values.profileImage[0].originFileObj);
+
+      console.log("Received formData:", formData);
+
+      const response = await axios.post(`register-user`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });   
+      // Handle success response
+      console.log("Registration success:", response.data);
+
+      // Clear the form
+      form.resetFields();
+
+      // Show success message
+      message.success("Registration successful!");
+    } catch (error) {
+      // Handle error
+      console.error("Registration failed:", error);
+
+      // Show error message
+      message.error("Registration failed. Please try again.");
+    }
   };
 
   const handleTermsChange = (e: any) => {
@@ -41,6 +81,15 @@ const RegisterPage: React.FC = () => {
     return e && e.fileList;
   };
 
+  const customRequest = ({ file, onSuccess, onError }: any) => {
+    // Ensure that the file is properly included in the request
+    console.log(file);
+    setTimeout(() => {
+      // Mock upload, you can replace this with your actual upload logic
+      onSuccess();
+    }, 1000);
+  };
+
   const checkImageType = (file: any) => {
     const isImage = file.type.startsWith("image/");
     if (!isImage) {
@@ -49,34 +98,15 @@ const RegisterPage: React.FC = () => {
     return isImage;
   };
 
-  const customRequest = ({ file, onSuccess, onError }: any) => {
-    setTimeout(() => {
-      // Mock upload, you can replace this with your actual upload logic
-      onSuccess();
-    }, 1000);
-  };
 
   return (
     <div className="flex flex-col items-center justify-start h-screen relative">
       <div className="absolute w-full h-full bg-blue-200"></div>
-      <div
-        className="absolute top-0 left-0 w-full h-full"
-        style={{
-          backgroundImage:
-            "linear-gradient(45deg, transparent 49.5%, #blue-50 49.5%, #blue-50 50.5%, transparent 50.5%)",
-        }}
-      ></div>
       <Navbar />
       <Card
         title="Member Registration"
         className="w-[95%] sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] shadow-md mt-16 border border-gray-200"
       >
-        {/* <p className="text-gray-700 mb-5">
-          ይህ ፎርም የተዘጋጀው የጂማ ዩንቨርስቲ ሐዋርያዊት ቤ/ክርስቲያን የቀድሞ ተማሪዎች እና አሁን ያሉ ተማሪዎች
-          ሕብረት በማጠናከር የተማሪዎችን ሕብረት ማጠናከር እና ሰበካውን ለመደገፍ እንድያስችል መረጃ በመሰብሰብ ማድራጅት
-          ነው። በተጨማሪም ባለፈው ዓመት በተከናወነው የህብረት ኮንፈረን ላይ እና በአካባቢዎ በተደረገው ውይይት መሠረት
-          የያዝናቸውን ዓላማዎችን ለማስፈጸም ነው።
-        </p> */}
         <Form form={form} onFinish={onFinish} layout="vertical">
           <Form.Item
             label="Full Name"
@@ -122,7 +152,7 @@ const RegisterPage: React.FC = () => {
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
 
-          <Form.Item label="Graduation Year From" name="graduationYear">
+          <Form.Item label="Exit (graduation) year" name="graduationYear">
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
 
@@ -139,7 +169,7 @@ const RegisterPage: React.FC = () => {
           <Form.Item label="Level" name="graduationLevel">
             <Select placeholder="Select graduation level">
               <Option value="diploma">Diploma</Option>
-              <Option value="undergraduate">Undergraduate</Option>
+              <Option value="undergraduate">Under graduate</Option>
               <Option value="masters">Masters</Option>
             </Select>
           </Form.Item>
@@ -179,11 +209,10 @@ const RegisterPage: React.FC = () => {
               <Option value="jimma">Jimma and area</Option>
               <Option value="wolaita">Wolaita soddo and area</Option>
               <Option value="hawassa">Hawassa and area</Option>
-              <Option value="adama">Adama</Option>
               <Option value="hossana">Hossana and area</Option>
               <Option value="adola">Adola and area</Option>
               <Option value="ambo">Ambo and area </Option>
-              <Option value="north">North</Option>
+              <Option value="north">North Ethiopia</Option>
               <Option value="east">East Ethiopia </Option>
             </Select>
           </Form.Item>
@@ -194,7 +223,7 @@ const RegisterPage: React.FC = () => {
             rules={[
               {
                 required: true,
-                message: "Please select your current address!",
+                message: "Please Enter your current address!",
               },
             ]}
           >
@@ -236,51 +265,35 @@ const RegisterPage: React.FC = () => {
             ]}
           >
             <Select placeholder="Annual membership contribution fee">
+              <Option value="120">120 per year</Option>
               <Option value="600">600 per year</Option>
               <Option value="1200">1200 per year</Option>
-              <Option value="notLimit">Do not limit (but I can support)</Option>
-              <Option value="1200">2400 per year (diaspora)</Option>
-              <Option value="notLimit">120 per year (for students)</Option>
+              <Option value="2400">2400 per year</Option>
+              <Option value="other">Other (specify)</Option>
             </Select>
           </Form.Item>
 
           <Form.Item
-            label="Payment period "
-            name="contributionFrequency"
+            label="Payment period"
+            name="paymentPeriod"
             rules={[
               {
                 required: true,
-                message: "Please select your contribution frequency!",
+                message: "Please select Payment period!",
               },
             ]}
           >
             <Select placeholder="Select contribution frequency">
-              <Option value="onceAYear">Once A Year</Option>
-              <Option value="everySixMonths">
-                Every six months (twice a year)
-              </Option>
-              <Option value="everyThreeMonths">
-                Every three months (4 times a year)
-              </Option>
-              <Option value="everyMonth">Every Month</Option>
+              <Option value="everyMonth">Every month</Option>
+              <Option value="everyQuarter">Every quarter</Option>
+              <Option value="biannual">Biannual</Option>
+              <Option value="fullPayment">Full payment at once</Option>
             </Select>
           </Form.Item>
 
-          {/* <Form.Item
-            name="guidingDocument"
-            label="Guiding Document (photo)"
-            rules={[
-              {
-                required: true,
-                message: "Please upload the guiding document!",
-              },
-            ]}
-          >
-            <Input type="file" />
-          </Form.Item> */}
           <Form.Item
-            label="Guiding Document Image"
-            name="guidingDocumentImage"
+            label="Profile Image"
+            name="profileImage"
             valuePropName="fileList"
             getValueFromEvent={normFile}
             rules={[
@@ -295,7 +308,7 @@ const RegisterPage: React.FC = () => {
               showUploadList={false}
               beforeUpload={checkImageType}
             >
-              <Button icon={<UploadOutlined />}>Upload Image</Button>
+              <Button icon={<UploadOutlined />}>Upload Profile Image</Button>
             </Upload>
           </Form.Item>
 
@@ -314,7 +327,13 @@ const RegisterPage: React.FC = () => {
 
           <Form.Item>
             <Checkbox onChange={handleTermsChange} checked={isTermsAccepted}>
-              Agreement on guiding document
+              I have read and agree to the{" "}
+              <a
+                href="/terms-and-conditions"
+                style={{ color: "blue", textDecoration: "underline" }}
+              >
+                Terms and Conditions
+              </a>
             </Checkbox>
           </Form.Item>
 
@@ -322,7 +341,7 @@ const RegisterPage: React.FC = () => {
             <Button
               type="default"
               htmlType="submit"
-              className="w-full bg-blue-400 text-white hover:bg-blue-500"
+              className="w-full bg-blue-400 text-white hover:bg-blue-400"
               disabled={!isTermsAccepted}
             >
               Register

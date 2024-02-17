@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   return (
     <Header className="fixed w-full z-50 bg-transparent">
       <div className="flex items-center justify-between">
-        <div className="text-white text-2xl font-bold">JUAC</div>
+        <div className="text-white text-2xl font-bold">JACSF</div>
         <div className="hidden lg:flex">
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">

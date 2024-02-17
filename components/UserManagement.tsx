@@ -1,74 +1,51 @@
 "use client";
-// components/UserManagement.js
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Table, Button, Modal, Form, Input, Space, Avatar, Tag } from "antd";
 import {
   UserAddOutlined,
   SearchOutlined,
   EditOutlined,
   DeleteOutlined,
-} from "@ant-design/icons"; // Import Ant Design icons
+} from "@ant-design/icons";
 import Select, { Option } from "rc-select";
+import axios from "./../config/axiosInstance";
 
 const UserManagement = () => {
-  const [users, setUsers] = useState([
-    {
-      key: "1",
-      username: "Tigabu.ab",
-      fullName: "Tigabu Abrham",
-      currentAddress: "Addis Ababa, Ethiopia",
-      phoneNumber: "+2519 13228892",
-      emailAddress: "tigabu@admin.com",
-      role: "Admin",
-      status: "Active",
-      profileImage: "https://example.com/john_doe.jpg",
-    },
-    {
-      key: "2",
-      username: "abeni.keb",
-      fullName: "Abenezer Kebede",
-      currentAddress: "Addis Ababa, Ethiopia",
-      phoneNumber: "+2519 13228892",
-      emailAddress: "abeni@admin.com",
-      role: "Admin",
-      status: "Active",
-      profileImage: "https://example.com/john_doe.jpg",
-    },
-    {
-      key: "3",
-      username: "eyosi.izzy",
-      fullName: "Eyosiyas Esrael",
-      currentAddress: "Addis Ababa, Ethiopia",
-      phoneNumber: "+2519 13228892",
-      emailAddress: "eyosi@admin.com",
-      role: "Admin",
-      status: "Active",
-      profileImage: "https://example.com/john_doe.jpg",
-    },
-    {
-      key: "4",
-      username: "dani.tesh",
-      fullName: "Daneal Teshale",
-      currentAddress: "Addis Ababa, Ethiopia",
-      phoneNumber: "+2519 13228892",
-      emailAddress: "dani@admin.com",
-      role: "User",
-      status: "Active",
-      profileImage: "https://example.com/john_doe.jpg",
-    },
-    {
-      key: "5",
-      username: "marta.aw",
-      fullName: "Marta Aweke",
-      currentAddress: "Hawasa, Ethiopia",
-      phoneNumber: "+2519 13228892",
-      emailAddress: "marta@admin.com",
-      role: "User",
-      status: "Active",
-      profileImage: "https://example.com/john_doe.jpg",
-    },
-  ]);
+  const [users, setUsers] = useState<Array<any>>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const { data: users } = await axios.get("/");
+        console.log("Fetched data:", users.users);
+        if (Array.isArray(users.users)) {
+          setUsers(
+            users.users.map((user: any, index: any) => {
+              return {
+                key: index,
+                username: user.fullName,
+                fullName: user.fullName,
+                currentAddress: user.currentAddress + ", Ethiopia",
+                phoneNumber: user.phoneNumber,
+                emailAddress: user.emailAddress,
+                role: user.role,
+                status: "Active",
+                profileImage: "https://example.com/john_doe.jpg",
+              };
+            })
+          );
+        } else {
+          console.error("Fetched data is not an array:", users);
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const columns = [
     {
@@ -141,9 +118,9 @@ const UserManagement = () => {
   };
 
   const onFinish = (values: any) => {
-    console.log("Received values:", values);
-    setUsers([...users, values]);
-    setIsModalVisible(false);
+    // console.log("Received values:", values);
+    // setUsers([...users, values]);
+    // setIsModalVisible(false);
   };
 
   return (
