@@ -15,9 +15,9 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <Header className="fixed w-full z-50 bg-transparent">
+    <Header className="fixed w-full z-40 h-20 bg-gradient-to-b from-blue-500 to-blue-400">
       <div className="flex items-center justify-between">
-        <div className="text-white text-2xl font-bold">JACSF</div>
+        <div className="text-white text-2xl font-pacifico font-bold">JACSF</div>
         <div className="hidden lg:flex">
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
       </div>
       {/* Mobile Menu */}
       {mobileMenuVisible && (
-        <div className="lg:hidden">
+        <div className="lg:hidden text-blue-500">
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
               <Link href="/">Login</Link>

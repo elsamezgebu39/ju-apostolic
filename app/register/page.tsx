@@ -29,22 +29,25 @@ const RegisterPage: React.FC = () => {
     try {
       const formData = new FormData();
 
-      formData.append('fullName', values.fullName);
-      formData.append('graduationLevel', values.graduationLevel);
-      formData.append('JUACU_engagement_center', values.JUACU_engagement_center);
-      formData.append('currentAddress', values.currentAddress);
-      formData.append('emailAddress', values.emailAddress);
-      formData.append('fieldOfStudy', values.fieldOfStudy);
-      formData.append('engagement', values.engagement);
-      formData.append('engagementAgreement', values.engagementAgreement);
-      formData.append('entryYear', values.entryYear);
-      formData.append('gender', values.gender);
-      formData.append('graduationYear', values.graduationYear);
-      formData.append('paymentPeriod', values.paymentPeriod);
-      formData.append('phoneNumber', values.phoneNumber);
-      formData.append('role', values.role);
-      formData.append('signature', values.signature);
-      formData.append('profileImage', values.profileImage[0].originFileObj);
+      formData.append("fullName", values.fullName);
+      formData.append("graduationLevel", values.graduationLevel);
+      formData.append(
+        "JUACU_engagement_center",
+        values.JUACU_engagement_center
+      );
+      formData.append("currentAddress", values.currentAddress);
+      formData.append("emailAddress", values.emailAddress);
+      formData.append("fieldOfStudy", values.fieldOfStudy);
+      formData.append("engagement", values.engagement);
+      formData.append("engagementAgreement", values.engagementAgreement);
+      formData.append("entryYear", values.entryYear);
+      formData.append("gender", values.gender);
+      formData.append("graduationYear", values.graduationYear);
+      formData.append("paymentPeriod", values.paymentPeriod);
+      formData.append("phoneNumber", values.phoneNumber);
+      formData.append("role", values.role);
+      formData.append("signature", values.signature);
+      formData.append("profileImage", values.profileImage[0].originFileObj);
 
       console.log("Received formData:", formData);
 
@@ -52,7 +55,7 @@ const RegisterPage: React.FC = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      });   
+      });
       // Handle success response
       console.log("Registration success:", response.data);
 
@@ -98,14 +101,12 @@ const RegisterPage: React.FC = () => {
     return isImage;
   };
 
-
   return (
     <div className="flex flex-col items-center justify-start h-screen relative">
-      <div className="absolute w-full h-full bg-blue-200"></div>
       <Navbar />
       <Card
         title="Member Registration"
-        className="w-[95%] sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] shadow-md mt-16 border border-gray-200"
+        className="w-[95%] sm:w-[60%] md:w-[50%] lg:w-[50%] xl:w-[40%] text-lg shadow-md mt-16 border border-gray-200 z-50"
       >
         <Form form={form} onFinish={onFinish} layout="vertical">
           <Form.Item

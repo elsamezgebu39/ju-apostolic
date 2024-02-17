@@ -15,7 +15,6 @@ export default async function RootLayout({ children }: any) {
   return (
     <html lang="en">
       <body>
-        {/* <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" /> */}
         <div className="main">
           <div className="gradient" />
         </div>

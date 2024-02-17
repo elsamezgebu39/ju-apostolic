@@ -5,6 +5,7 @@ import { message } from "antd";
 import { Form, Input, Button, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const { Content } = Layout;
 
@@ -14,8 +15,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const users = [
-    { email: "tigabu@admin.com", password: "12345", name: "Tigabu Abrham" },
-    { email: "abeni@admin.com", password: "12345", name: "Abenezer Kebede" },
+    {
+      email: "tigabu@admin.com",
+      password: "12345",
+      name: "Tigabu Abrham",
+      token: "bvfbvhf6374673&&^^%%$#",
+    },
+    {
+      email: "abeni@admin.com",
+      password: "12345",
+      name: "Abenezer Kebede",
+      token: "bvfbvhf6374673&&^^%%$#",
+    },
   ];
 
   const handleLogin = () => {
@@ -25,6 +36,7 @@ const Login = () => {
     );
 
     if (user) {
+      Cookies.set("userToken", user.token, { expires: 7 });
       message.success(`Welcome, ${user.name}!`);
       router.push("/");
     } else {
