@@ -9,25 +9,26 @@ import Cookies from "js-cookie";
 
 const { Content } = Layout;
 
+const users = [
+  {
+    email: "tigabu@admin.com",
+    password: "12345",
+    name: "Tigabu Abrham",
+    token: "bvfbvhf6374673&&^^%%$#",
+  },
+  {
+    email: "abeni@admin.com",
+    password: "12345",
+    name: "Abenezer Kebede",
+    token: "bvfbvhf6374673&&^^%%$#",
+  },
+];
+
+const router = useRouter();
+
 const login = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const users = [
-    {
-      email: "tigabu@admin.com",
-      password: "12345",
-      name: "Tigabu Abrham",
-      token: "bvfbvhf6374673&&^^%%$#",
-    },
-    {
-      email: "abeni@admin.com",
-      password: "12345",
-      name: "Abenezer Kebede",
-      token: "bvfbvhf6374673&&^^%%$#",
-    },
-  ];
 
   const handlelogin = () => {
     console.log(`Email: ${email}, Password: ${password}`);
