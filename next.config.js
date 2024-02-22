@@ -6,7 +6,7 @@ module.exports = {
     return [
       {
         source: "/api/juac/:path*",
-        destination: "http://localhost:8000/api/juac/:path*",
+        destination: "https://test-mard.artseb.studio/api/juac/:path*",
       },
     ];
   },
