@@ -24,9 +24,8 @@ const users = [
   },
 ];
 
-const router = useRouter();
-
-const login = () => {
+const login: React.FC = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
