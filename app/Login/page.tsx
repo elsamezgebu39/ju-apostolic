@@ -24,7 +24,7 @@ const users = [
   },
 ];
 
-const login: React.FC = () => {
+const LoginPage: React.FC = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -144,4 +144,4 @@ const login: React.FC = () => {
   );
 };
 
-export default login;
+export default LoginPage;
