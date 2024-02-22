@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex">
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <Link href="/">login</Link>
+              <Link href="/">Login</Link>
             </Menu.Item>
           </Menu>
         </div>
@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
         <div className="lg:hidden text-blue-500">
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <Link href="/">login</Link>
+              <Link href="/">Login</Link>
             </Menu.Item>
           </Menu>
         </div>

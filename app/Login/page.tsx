@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handlelogin = () => {
+  const handleLogin = () => {
     console.log(`Email: ${email}, Password: ${password}`);
     const user = users.find(
       (user) => user.email === email && user.password === password
@@ -88,7 +88,7 @@ const LoginPage: React.FC = () => {
 
         <div className="w-full z-50 bg-white h-[50%] md:h-full flex flex-col justify-center items-start px-4 md:px-32 md:pt-4 pt-16 my-auto mx-auto">
           <h1 className="text-2xl font-semibold mb-2 mt-4">Welcome,</h1>
-          <h1 className="text-lg mb-8">login to your account</h1>
+          <h1 className="text-lg mb-8">Login to your account</h1>
           <Form>
             <Form.Item label="Email">
               <Input
@@ -111,10 +111,10 @@ const LoginPage: React.FC = () => {
             <Form.Item className="mb-4">
               <Button
                 type="primary"
-                onClick={handlelogin}
+                onClick={handleLogin}
                 className="w-full bg-blue-500 hover:bg-blue-600"
               >
-                login to your account
+                Login to your account
               </Button>
             </Form.Item>
             <div className="flex justify-between">

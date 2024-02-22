@@ -350,7 +350,7 @@ const RegisterPage: React.FC = () => {
           </Form.Item>
 
           <Form.Item>
-            <Link href="/login">
+            <Link href="/Login">
               <span className="block text-center text-blue-500">
                 Back to Home
               </span>

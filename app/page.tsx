@@ -30,8 +30,8 @@ const Home = () => {
   useEffect(() => {
     const userToken = Cookies.get("userToken");
     if (!userToken) {
-      // Redirect to login if user token is not found
-      router.push("/login");
+      // Redirect to Login if user token is not found
+      router.push("/Login");
     } else {
       // Fetch user details or decode token if needed
       // For now, setting a mock user for demonstration
@@ -45,9 +45,9 @@ const Home = () => {
 
   const handleMenuClick = (e: any) => {
     if (e.key === "logout") {
-      // Clear user token and redirect to login on logout
+      // Clear user token and redirect to Login on logout
       Cookies.remove("userToken");
-      router.push("/login");
+      router.push("/Login");
       console.log("Logout clicked");
     }
   };
@@ -108,7 +108,7 @@ export default Home;
 
 //   const handleMenuClick = (e: any) => {
 //     if (e.key === "logout") {
-//       router.push("/login");
+//       router.push("/Login");
 //       // Perform logout action
 //       console.log("Logout clicked");
 //     }
