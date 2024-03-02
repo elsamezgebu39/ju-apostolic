@@ -19,6 +19,7 @@ const UserManagement = () => {
     const fetchUsers = async () => {
       try {
         const { data: users } = await axios.get("/");
+
         console.log("Fetched data:", users.users);
         if (Array.isArray(users.users)) {
           setUsers(
